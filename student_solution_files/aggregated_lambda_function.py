@@ -99,7 +99,7 @@ def email_response(name, critical_phrase_list, list_of_extracted_phrases, AWS_Co
 
     # --- Check for project phrases ---
     Phrase_Matcher_Project = key_phrase_finder(['github', 'git', 'Git',
-                                                'GitHub', 'projects',
+                                                'GitHub', 'projects', 'Projects',
                                                 'portfolio', 'Portfolio'],
                                                list_of_extracted_phrases)
     Matched_Phrases_Project = Phrase_Matcher_Project[0]
@@ -280,7 +280,7 @@ def lambda_handler(event, context):
     # --- Insert your code here ---
     # Do not change the name of this variable
     name = dec_dict['name']
-    email_text = email_response(name, '', phrase, sentiment)
+    email_text = email_response(name, ['Projects', 'CV', 'Portfolio', 'github', 'git', 'Git', 'GitHub'], phrase, sentiment)
 
     # -----------------------------
 
@@ -380,8 +380,3 @@ def lambda_handler(event, context):
     # -----------------------------
 
     return lambda_response
-
-
-
-
-
