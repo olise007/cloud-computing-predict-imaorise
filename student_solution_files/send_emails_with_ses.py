@@ -27,7 +27,7 @@ def lambda_handler(event, context):
 
     # Sample text that you would like to email to your recipient 
     # address from your sender address.
-    email_text = 'Insert your sample email here'
+    email_text = 'This is to confirm that Emailing works'
 
     # ** SES Functionality **
 
@@ -37,10 +37,10 @@ def lambda_handler(event, context):
     SENDER = 'olise007@gmail.com'
     # -----------------------------
 
-    # Replace recipient@example.com with a "To" address. If your account 
+    # Replace recipient@example.com with a "To" address. If your account
     # is still in the sandbox, this address must be verified.
     # --- Insert your code here ---
-    RECIPIENT = 'recipient@example.com' 
+    RECIPIENT = dec_dict['email']
     # -----------------------------
 
 
@@ -84,21 +84,21 @@ def lambda_handler(event, context):
             Source=SENDER,
         )
 
-    # Display an error if something goes wrong.	
+    # Display an error if something goes wrong.
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
         print("Email sent! Message ID:"),
         print(ses_response['MessageId'])
 
-    # ** Create a response object to inform the website 
+    # ** Create a response object to inform the website
     #    that the workflow executed successfully. **
     lambda_response = {
         'statusCode': 200,
         'body': json.dumps({
         'Name': dec_dict['name'],
         'Email': dec_dict['email'],
-        'Cell': dec_dict['phone'], 
+        'Cell': dec_dict['phone'],
         'Message': dec_dict['message'],
         'SES_response': ses_response,
         'Email_message': email_text
@@ -106,6 +106,3 @@ def lambda_handler(event, context):
     }
 
     return lambda_response
-            
-        
-    
